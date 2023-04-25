@@ -8,6 +8,8 @@ router.use(express.json());
 
 router.use('/public', express.static(path.join(__dirname, 'public')))
 
+//get the video list
+
 router.get('/', (req, res) => {
     const dataEl = getVideo();
     const smallVideo = dataEl.map(video => {
@@ -21,6 +23,8 @@ router.get('/', (req, res) => {
     res.json(smallVideo)
 })
 
+//displaying video
+
 router.get('/:id', (req, res) => {
     const id = req.params.id
     const dataFile = fs.readFileSync("./data/video-detail.json");
@@ -28,6 +32,8 @@ router.get('/:id', (req, res) => {
     const video = data.find(item => item.id === id)
     res.json(video)
 })
+
+//posting comments starts here
 
 router.post("/:id/comments", (req, res, next) => {
     const dataEl = getVideo();
@@ -54,6 +60,9 @@ router.post("/:id/comments", (req, res, next) => {
 
     res.send("created");
 });
+
+
+//posting videos starts here
 
 router.post("/", validator, (req, res) => {
     const videoDetailsDataFile = fs.readFileSync("./data/video-detail.json");
@@ -179,6 +188,7 @@ router.delete("/:id/comments/:commentId", (req, res) => {
   });
 
 
+//some utility functions here
 
 function getVideo() {
     const dataFile = fs.readFileSync("./data/video-detail.json");

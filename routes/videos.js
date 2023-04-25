@@ -36,7 +36,7 @@ router.post("/:id/comments", (req, res, next) => {
 
     const newComment = {
         id: v4(),
-        name: "User",
+        name: "Tom Cruise",
         comment: comment,
         likes: 0,
         timestamp: new Date().getTime()
@@ -106,6 +106,7 @@ router.post("/", validator, (req, res) => {
     res.send("created");
 });
 
+
 //put likes start from here
 
 router.put("/:id/comments/:commentId/like", (req, res) => {
@@ -113,7 +114,6 @@ router.put("/:id/comments/:commentId/like", (req, res) => {
     const videoDetailsData = JSON.parse(videoDetailsDataFile);
   
     const { id, commentId } = req.params;
-    console.log(id, commentId)
     // Find the video object with the matching videoId
     const videoIndex = videoDetailsData.findIndex((video) => video.id === id);
   
@@ -135,7 +135,6 @@ router.put("/:id/comments/:commentId/like", (req, res) => {
   
     // Save the updated data to the video-detail.json file
     fs.writeFileSync("./data/video-detail.json", JSON.stringify(videoDetailsData));
-    console.log(videoDetailsData)
   
     // Return the updated video object
     res.status(200).json(videoDetailsData[videoIndex]);
@@ -173,7 +172,6 @@ router.delete("/:id/comments/:commentId", (req, res) => {
   
     // Save the updated data to the video-detail.json file
     fs.writeFileSync("./data/video-detail.json", JSON.stringify(videoDetailsData));
-    console.log(videoDetailsData)
   
     // Return the updated video object
     res.status(200).json(videoDetailsData[videoIndex]);

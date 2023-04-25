@@ -45,6 +45,7 @@ router.post("/:id/comments", (req, res, next) => {
     // initially, I tried the const findVideo = dataEl.find(video=>video.id===id)
     // but cannot get the id successfully. Don't know why. 
     // The console.log result shows that .find method returned index of -1
+    //tried the .findIndex(), it solved the problem
 
     const findIndex = dataEl.findIndex(video => video.id === id)
     dataEl[findIndex].comments.unshift(newComment)
